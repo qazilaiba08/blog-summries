@@ -30,7 +30,7 @@ export async function connectToDatabase() {
   return client.db("blog_summaries");
 }
 
-// ✅ New function to save blog content
+
 export async function saveFullText({
   url,
   text,
