@@ -1,6 +1,6 @@
 import { translations } from './translations';
 
-interface BlogProcessingResult {
+export interface BlogProcessingResult {
   originalText: string;
   summary: string;
   translatedSummary: string;
