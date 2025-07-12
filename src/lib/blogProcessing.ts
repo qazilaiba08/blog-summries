@@ -46,10 +46,7 @@ const translateToUrdu = (text: string): string => {
     .join(' ');
 };
 
-/**
- * Main processing function that combines all operations
- */
-export const processBlog = async (url: string): Promise<BlogProcessingResult> => {
+ const processBlog = async (url: string): Promise<BlogProcessingResult> => {
   try {
     const originalText = await scrapeBlogContent(url);
     const summary = summarizeText(originalText);
@@ -69,3 +66,5 @@ export const processBlog = async (url: string): Promise<BlogProcessingResult> =>
     };
   }
 };
+
+export default processBlog;

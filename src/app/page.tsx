@@ -1,10 +1,10 @@
 'use client';
 import { useState } from 'react';
-import { processBlog } from '@/lib/blogProcessing';
+import processBlog  from '@/lib/blogProcessing';
 
 export default function BlogSummarizer() {
   const [url, setUrl] = useState('');
-  const [result, setResult] = useState<(BlogProcessingResult | null)>(null);
+  const [result,setResult] = useState<BlogProcessingResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 

@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@/Components/ui/button";
 import { Textarea } from "@/Components/ui/textarea";
-import { translateToUrdu } from "@/lib/blogProcessing";
+import  {translations}  from "@/lib/translations";
 import { useState } from "react";
 
 export function SummaryDisplay({
@@ -10,12 +10,13 @@ export function SummaryDisplay({
 }: {
   originalText: string;
   summaryText: string;
+  translatedSummaryText: string;
 }) {
   const [language, setLanguage] = useState<"en" | "ur">("en");
   const [isSaving, setIsSaving] = useState(false);
 
   const translatedSummary = language === "ur" 
-    ? translateToUrdu(summaryText) 
+    ? translations
     : summaryText;
 
   const handleSave = async () => {
@@ -64,7 +65,8 @@ export function SummaryDisplay({
           </div>
         </div>
         <Textarea
-          value={translatedSummary}
+        
+
           readOnly
           className="h-64"
         />
