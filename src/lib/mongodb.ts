@@ -15,19 +15,37 @@ if (!process.env.MONGODB_URI) {
 }
 
 if (process.env.NODE_ENV === "development") {
-  // In development mode, use a global variable so the client is not recreated on every hot reload
   if (!global._mongoClientPromise) {
     client = new MongoClient(uri, options);
     global._mongoClientPromise = client.connect();
   }
   clientPromise = global._mongoClientPromise;
 } else {
-  // In production, it's fine to create a new client for each run
   client = new MongoClient(uri, options);
   clientPromise = client.connect();
 }
 
-export default async function connectToDatabase() {
+export async function connectToDatabase() {
   const client = await clientPromise;
   return client.db("blog_summaries");
+}
+
+// ✅ New function to save blog content
+export async function saveFullText({
+  url,
+  text,
+}: {
+  url: string;
+  text: string;
+}) {
+  const db = await connectToDatabase();
+  const collection = db.collection("full_texts");
+
+  const result = await collection.insertOne({
+    url,
+    text,
+    createdAt: new Date(),
+  });
+
+  return result;
 }
